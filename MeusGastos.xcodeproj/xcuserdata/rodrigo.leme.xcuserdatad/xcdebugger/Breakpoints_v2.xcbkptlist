@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "DD75A586-FB10-431F-8183-264607F77737"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+         <BreakpointContent
+            uuid = "86E941DD-11F3-4D98-AFA8-C01CE1832417"
+            shouldBeEnabled = "Yes"
+            condition = "$arg3 == nil"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            symbolName = "[UIImage imageNamed:]"
+            moduleName = "">
+            <Locations>
+               <Location
+                  uuid = "86E941DD-11F3-4D98-AFA8-C01CE1832417 - 9cc70c83f07c02e4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[UIImage imageNamed:]"
+                  moduleName = "UIKitCore"
+                  usesParentBreakpointCondition = "Yes"
+                  offsetFromSymbolStart = "0">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
