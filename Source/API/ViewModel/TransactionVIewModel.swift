@@ -56,6 +56,8 @@ struct TransactionViewModel {
         
         mock.append(TransactionViewModel(withModel: TransactionModel(id: 1, name: "Freela de Maio", category: CategoryModel(id: 2, name: "Salário do mês", about: "", uid: "CodandoComMoa"), date: Date(), amount: 3000, uid: "CodandoComMoa", type: 0)))
         
+        mock.append(TransactionViewModel(withModel: TransactionModel(id: 1, name: "Mesada do Papai", category: CategoryModel(id: 2, name: "Salário do mês", about: "", uid: "CodandoComMoa"), date: Date(), amount: 500, uid: "CodandoComMoa", type: 0)))
+        
         mock.append(TransactionViewModel(withModel: TransactionModel(id: 2, name: "Agua de Maio", category: CategoryModel(id: 1, name: "Despesas Fixas", about: "", uid: "CodandoComMoa"), date: Date(), amount: 120, uid: "CodandoComMoa", type: 1)))
         
         mock.append(TransactionViewModel(withModel: TransactionModel(id: 2, name: "Luz de Maio", category: CategoryModel(id: 1, name: "Despesas Fixas", about: "", uid: "CodandoComMoa"), date: Date(), amount: 420, uid: "CodandoComMoa", type: 1)))
@@ -63,6 +65,8 @@ struct TransactionViewModel {
         mock.append(TransactionViewModel(withModel: TransactionModel(id: 2, name: "Aluguel de Maio", category: CategoryModel(id: 1, name: "Despesas Fixas", about: "", uid: "CodandoComMoa"), date: Date(), amount: 1500, uid: "CodandoComMoa", type: 1)))
         
         mock.append(TransactionViewModel(withModel: TransactionModel(id: 2, name: "Financiamento de Maio", category: CategoryModel(id: 1, name: "Despesas Fixas", about: "", uid: "CodandoComMoa"), date: Date(), amount: 750, uid: "CodandoComMoa", type: 1)))
+        
+        mock.append(TransactionViewModel(withModel: TransactionModel(id: 2, name: "Cinema", category: CategoryModel(id: 1, name: "Despesas Alternativas", about: "", uid: "CodandoComMoa"), date: Date(), amount: 40, uid: "CodandoComMoa", type: 1)))
         
         return mock
     }

@@ -11,6 +11,14 @@ import UIKit
 class HomeCoordinator: Coordinator {
     var navigationController: UINavigationController
     
+    lazy var homeViewController: HomeViewController = {
+        let viewController = HomeViewController()
+        viewController.tabBarItem.image = UIImage(systemName: "dollarsign.circle.fill")
+        viewController.title = "Meus Gastos"
+        
+        return viewController
+    }()
+    
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }

@@ -143,7 +143,7 @@ class HomeView: UIView {
             tableView.topAnchor.constraint(equalTo: lancamentos.bottomAnchor, constant: 12),
             tableView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 24),
             tableView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -24),
-            tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -24)
+            tableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -5)
         ])
     }
     

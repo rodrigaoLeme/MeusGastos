@@ -20,10 +20,12 @@ class HomeViewController: ViewControllerDefault {
         self.view = homeView
     }
     
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.title = "Meus Gastos"
+        self.tabBarController?.title = "Meus Gastos"
+        //self.title = "Meus Gastos"
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
