@@ -1,10 +1,6 @@
 //
 //  LoginView.swift
 //  MeusGastos
-
-
-
-
 //
 //  Created by IATec - Rodrigo Leme on 29/11/22.
 //
@@ -13,22 +9,32 @@ import Foundation
 import UIKit
 
 class LoginView: UIView {
-    var onRegisterTap: (() -> Void)?
+    //MARK: Closures
+    var onForgotTap: (() -> Void)?
     var onLoginTap: (() -> Void)?
+    //var onLoginTap: ((_ email: String, _ password: String) -> Void)?
     
-    //MARK: LabelDefault
-    let titleLabel = LabelDefault(text: "Login", font: UIFont.systemFont(ofSize: 25, weight: .bold))
-    let emailLabel = LabelDefault(text: "Email")
-    let passwordLabel = LabelDefault(text: "Senha")
+    //MARK: Properties
+    let scrollView = UIScrollView()
+    let contentView = UIView()
     
-    //MARK: TextFieldDefault
-    let emailTextField = TextFieldDefault(placeholder: "Infomer seu e-mail", keyboardType: .emailAddress)
-    let passwordTextField = TextFieldDefault(placeholder: "", isSecure: true)
+    lazy var imgLogin: UIImageView = {
+        let img = UIImageView()
+        img.image = UIImage(named: "loginImage")
+        img.translatesAutoresizingMaskIntoConstraints = false
+        img.contentMode = .scaleAspectFit
+        
+        return img
+    }()
     
+    lazy var facebookButton = ButtonSocialMedias(typeSocialMedia: .facebook)
+    lazy var googleButton = ButtonSocialMedias(typeSocialMedia: .google)
     
-    //MARK: ButtonDefault
-    let buttonLogin = ButtonDefault(title: "Entrar")
-    let buttonRegister = ButtonDefault(title: "Registrar")
+    let emailTextField = TextFieldDefault(placeholder: "Email", keyboardType: .emailAddress)
+    let senhaTextField = TextFieldDefault(placeholder: "Senha", isSecure: true)
+    
+    lazy var loginButton = ButtonPrimary(title: "Entrar")
+    lazy var forgotPasswordButton = ButtonTextOnly(title: "Esqueci a senha :/")
     
     //MARK: Inits
     override init(frame: CGRect) {
@@ -38,84 +44,115 @@ class LoginView: UIView {
     }
     
     private func setElementsVisual() {
-        setTitle()
-        setEmail()
-        setPassword()
-        setButtonLogin()
-        setButtonRegister()
+        setupScrollView()
+        setImage()
+        setSocialMediaButtons()
+        setTextFields()
+        setForgotButton()
+        setLoginButton()
     }
     
-    private func setTitle() {
-        self.addSubview(titleLabel)
+    func setupScrollView() {
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(scrollView)
+        scrollView.addSubview(contentView)
         
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 20),
-            titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 24),
-            titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -24),
+            scrollView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            scrollView.widthAnchor.constraint(equalTo: self.widthAnchor),
+            scrollView.topAnchor.constraint(equalTo: self.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.heightAnchor.constraint(greaterThanOrEqualTo: scrollView.heightAnchor, constant: setBottomConstant())
+        ])
+        
+    }
+    
+    private func setImage() {
+        contentView.addSubview(imgLogin)
+        
+        NSLayoutConstraint.activate([
+            imgLogin.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imgLogin.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
+            imgLogin.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0)
         ])
     }
     
-    private func setEmail() {
-        self.addSubview(emailLabel)
-        self.addSubview(emailTextField)
+    private func setSocialMediaButtons() {
+        contentView.addSubview(facebookButton)
+        contentView.addSubview(googleButton)
         
         NSLayoutConstraint.activate([
-            emailLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 30),
-            emailLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 24),
-            emailLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -24),
+            facebookButton.topAnchor.constraint(equalTo: imgLogin.bottomAnchor, constant: 10),
+            facebookButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            facebookButton.heightAnchor.constraint(equalToConstant: 50),
+            facebookButton.widthAnchor.constraint(equalToConstant: calculateWithButton())
+        ])
+        
+        NSLayoutConstraint.activate([
+            googleButton.topAnchor.constraint(equalTo: facebookButton.topAnchor),
+            googleButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
+            googleButton.heightAnchor.constraint(equalToConstant: 50),
+            googleButton.widthAnchor.constraint(equalToConstant: calculateWithButton())
+        ])
+    }
+    
+    private func setTextFields() {
+        contentView.addSubview(emailTextField)
+        contentView.addSubview(senhaTextField)
+        
+        emailTextField.tag = 1
+        emailTextField.delegate = self
+        
+        senhaTextField.tag = 2
+        senhaTextField.delegate = self
+        
+        NSLayoutConstraint.activate([
+            emailTextField.topAnchor.constraint(equalTo: facebookButton.bottomAnchor, constant: 10),
+            emailTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            emailTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
+            emailTextField.heightAnchor.constraint(equalToConstant: 60),
             
-            emailTextField.topAnchor.constraint(equalTo: emailLabel.bottomAnchor, constant: 12),
-            emailTextField.leftAnchor.constraint(equalTo: emailLabel.leftAnchor),
-            emailTextField.rightAnchor.constraint(equalTo: emailLabel.rightAnchor),
-            emailTextField.heightAnchor.constraint(equalToConstant: 40),
+            senhaTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 10),
+            senhaTextField.leadingAnchor.constraint(equalTo: emailTextField.leadingAnchor),
+            senhaTextField.trailingAnchor.constraint(equalTo: emailTextField.trailingAnchor),
+            senhaTextField.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
     
-    private func setPassword() {
-        self.addSubview(passwordLabel)
-        self.addSubview(passwordTextField)
+    
+    private func setForgotButton() {
+        contentView.addSubview(forgotPasswordButton)
         
         NSLayoutConstraint.activate([
-            passwordLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 30),
-            passwordLabel.leftAnchor.constraint(equalTo: emailTextField.leftAnchor),
-            passwordLabel.rightAnchor.constraint(equalTo: emailTextField.rightAnchor),
-            
-            passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 12),
-            passwordTextField.leftAnchor.constraint(equalTo: passwordLabel.leftAnchor),
-            passwordTextField.rightAnchor.constraint(equalTo: passwordLabel.rightAnchor),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 40),
+            forgotPasswordButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            forgotPasswordButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            forgotPasswordButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
+            forgotPasswordButton.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
     
-    private func setButtonLogin() {
-        self.addSubview(buttonLogin)
+    private func setLoginButton() {
+        contentView.addSubview(loginButton)
         
-        buttonLogin.addTarget(self, action: #selector(buttonLoginTap), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(buttonLoginTap), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
-            buttonLogin.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30),
-            buttonLogin.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 24),
-            buttonLogin.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -24),
-            buttonLogin.heightAnchor.constraint(equalToConstant: 50)
+            loginButton.bottomAnchor.constraint(equalTo: forgotPasswordButton.topAnchor, constant: 10),
+            loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
+            loginButton.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
     
-    private func setButtonRegister() {
-        self.addSubview(buttonRegister)
-        
-        buttonRegister.addTarget(self, action: #selector(buttonRegisterTap), for: .touchUpInside)
-        
-        NSLayoutConstraint.activate([
-            buttonRegister.topAnchor.constraint(equalTo: buttonLogin.bottomAnchor, constant: 30),
-            buttonRegister.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 24),
-            buttonRegister.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -24),
-            buttonRegister.heightAnchor.constraint(equalToConstant: 50)
-        ])
-    }
-    
+    //MARK: Actions
     @objc
-    func buttonRegisterTap() {
-        self.onRegisterTap?()
+    func buttonForgotTap() {
+        self.onForgotTap?()
     }
     
     @objc
@@ -123,7 +160,47 @@ class LoginView: UIView {
         self.onLoginTap?()
     }
     
+//    func buttonLoginTap() {
+//        if let email = emailTextField.text, let password = senhaTextField.text {
+//            self.onLoginTap(email, password)
+//        }
+//    }
+    
+    //MARK: Functions
+    private func calculateWithButton() -> CGFloat{
+        return (Constants.ScreenSizes.screenWidth / 2) - 30
+    }
+    
+    func setBottomConstant() -> CGFloat {
+        print(Constants.ScreenSizes.screenHeight)
+        switch (Constants.ScreenSizes.screenHeight) {
+        case 932.0, 852.0:
+            return -130
+        case 667.0:
+            return 0
+        default:
+            return -20
+        }
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
+//MARK: Extensions
+extension LoginView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let nextTag = textField.tag + 1
+
+        if let nextResponder = textField.superview?.viewWithTag(nextTag) {
+            nextResponder.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+            superview?.endEditing(true)
+        }
+
+        return true
     }
 }

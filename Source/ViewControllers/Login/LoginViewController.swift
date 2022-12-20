@@ -9,18 +9,23 @@ import Foundation
 import UIKit
 
 class LoginViewController: ViewControllerDefault {
-    var onRegisterTap: (() -> Void)?
+    var onForgotTap: (() -> Void)?
     var onLoginTap: (() -> Void)?
     
     lazy var loginView: LoginView = {
        let view = LoginView()
         view.backgroundColor = .white
-        view.onRegisterTap = {
-            self.onRegisterTap?()
+        view.onForgotTap = {
+            self.onForgotTap?()
         }
         view.onLoginTap = {
             self.onLoginTap?()
         }
+        
+//        view.onLoginTap = {[weak self] in
+//            guard let self = self else { return }
+//            self.loginTap(email, password)
+//        }
         return view
     }()
     
@@ -33,6 +38,11 @@ class LoginViewController: ViewControllerDefault {
 //
 //        self.afterShowKeyboard = { heightKeyboard in
 //            print("O Teclado subiu com \(heightKeyboard) de altura")
+//        self.view.frame.origin.y -= keyboardSize.height
 //        }
+    }
+    
+    func loginTap(_ email: String, _ password: String) {
+        
     }
 }

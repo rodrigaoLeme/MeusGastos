@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        let viewController = ViewController()
 //        navigationController.pushViewController(viewController, animated: false)
         
-        let coordinator = TabBarCoordinator(navigationController: navigationController)
+        let coordinator = PresentCoordinator(navigationController: navigationController)
         coordinator.start()
     }
 
