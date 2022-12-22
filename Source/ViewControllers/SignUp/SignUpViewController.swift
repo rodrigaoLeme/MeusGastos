@@ -8,9 +8,15 @@
 import UIKit
 
 class SignUpViewController: ViewControllerDefault {
+    //MARK: Clousures
+    var onRegisterSuccess: (() -> Void)?
     
-    var signUpView: SignUpView = {
+    lazy var signUpView: SignUpView = {
         let view = SignUpView()
+        
+        view.onRegisterTap = { name, email, password in
+            self.registerTap(name, email, password)
+        }
         
         return view
     }()
@@ -28,6 +34,19 @@ class SignUpViewController: ViewControllerDefault {
             print(self.view.frame.origin.y)
             if (self.view.frame.origin.y == 0) {
                 self.view.frame.origin.y -= heightKeyboard
+            }
+        }
+    }
+    
+    func registerTap(_ name: String, _ email: String, _ password: String) {
+        let userViewModel = UserViewModel()
+        
+        userViewModel.setUserFromApi(name, email, password) { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.onRegisterSuccess?()
+            case .failure(let error):
+                self?.showMessage("Erro", error.localizedDescription)
             }
         }
     }

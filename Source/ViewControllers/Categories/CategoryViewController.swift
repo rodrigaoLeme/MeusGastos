@@ -10,6 +10,7 @@ import UIKit
 class CategoryViewController: ViewControllerDefault {
     private lazy var categoryView: CategoryView = {
         let view = CategoryView()
+        view.backgroundColor = .red
         
         return view
     }()

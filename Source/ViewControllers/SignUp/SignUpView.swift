@@ -9,6 +9,8 @@ import UIKit
 
 class SignUpView: UIView {
     //MARK: Closures
+    var onRegisterTap: ((_ name: String, _ email: String, _ password: String) -> Void)?
+    
     
     //MARK: Properts
     let scrollView = UIScrollView()
@@ -131,6 +133,8 @@ class SignUpView: UIView {
     private func setCreateButton() {
         contentView.addSubview(createButton)
         
+        createButton.addTarget(self, action: #selector(registerButtonTap), for: .touchUpInside)
+        
         NSLayoutConstraint.activate([
             //createButton.topAnchor.constraint(greaterThanOrEqualTo: senhaTextField.bottomAnchor, constant: setBottomConstant()),
             //createButton.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -153,6 +157,13 @@ class SignUpView: UIView {
             return 0
         default:
             return -60
+        }
+    }
+    
+    @objc
+    func registerButtonTap() {
+        if let name = nameTextField.text, let email = emailTextField.text, let password = senhaTextField.text {
+            self.onRegisterTap?(name, email, password)
         }
     }
     

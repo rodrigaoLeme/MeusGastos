@@ -19,10 +19,12 @@ class TabBarCoordinator: Coordinator {
         
         let homeCoordinator = HomeCoordinator(navigationController: self.navigationController)
         let categoryCoordinator = CategoryCoordinator(navigationController: self.navigationController)
+        let profileCoordinator = ProfileCoordinator(navigationController: self.navigationController)
         
         tabBarController.setViewControllers([
             homeCoordinator.homeViewController,
-            categoryCoordinator.categoryViewController
+            categoryCoordinator.categoryViewController,
+            profileCoordinator.profileViewController,
         ], animated: true)
         
         self.navigationController.pushViewController(tabBarController, animated: true)

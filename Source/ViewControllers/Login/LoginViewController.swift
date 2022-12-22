@@ -10,7 +10,7 @@ import UIKit
 
 class LoginViewController: ViewControllerDefault {
     var onForgotTap: (() -> Void)?
-    var onLoginTap: (() -> Void)?
+    var onLoginSuccess: (() -> Void)?
     
     lazy var loginView: LoginView = {
        let view = LoginView()
@@ -18,14 +18,11 @@ class LoginViewController: ViewControllerDefault {
         view.onForgotTap = {
             self.onForgotTap?()
         }
-        view.onLoginTap = {
-            self.onLoginTap?()
+        
+        view.onLoginTap = { email, password in
+            self.loginTap(email, password)
         }
         
-//        view.onLoginTap = {[weak self] in
-//            guard let self = self else { return }
-//            self.loginTap(email, password)
-//        }
         return view
     }()
     
@@ -43,6 +40,21 @@ class LoginViewController: ViewControllerDefault {
     }
     
     func loginTap(_ email: String, _ password: String) {
+        let userViewModel = UserViewModel()
         
+        userViewModel.getUserFromApi(email, password) { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.onLoginSuccess?()
+            case .failure(let error):
+                self?.showMessage("Erro", error.localizedDescription)
+            }
+        }
     }
+    
+//    func showMessage(_ title: String, _ message: String) {
+//        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//        self.present(alert, animated: true, completion: nil)
+//    }
 }

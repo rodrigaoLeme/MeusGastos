@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import FirebaseAuth
 
 class HomeViewController: ViewControllerDefault {
     private lazy var homeView: HomeView = {

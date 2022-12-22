@@ -22,7 +22,7 @@ class LoginCoordinator: Coordinator {
 //            self.showRegister()
 //        }
         
-        viewController.onLoginTap = {
+        viewController.onLoginSuccess = {
             self.showHome()
         }
         

@@ -17,6 +17,17 @@ class SignUpCoordinator: Coordinator {
     func start() {
         let viewController = SignUpViewController()
         
+        viewController.onRegisterSuccess = {
+            self.homeStart()
+        }
+        
         self.navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    private func homeStart() {
+        self.navigationController.viewControllers.removeAll()
+        
+        let coordinator = TabBarCoordinator(navigationController: self.navigationController)
+        coordinator.start()
     }
 }

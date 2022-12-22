@@ -11,10 +11,10 @@ import UIKit
 class LoginView: UIView {
     //MARK: Closures
     var onForgotTap: (() -> Void)?
-    var onLoginTap: (() -> Void)?
-    //var onLoginTap: ((_ email: String, _ password: String) -> Void)?
+    var onLoginTap: ((_ email: String, _ password: String) -> Void)?
     
     //MARK: Properties
+    lazy var contentViewSize = CGSize(width: self.frame.width, height: self.frame.height)
     let scrollView = UIScrollView()
     let contentView = UIView()
     
@@ -87,7 +87,7 @@ class LoginView: UIView {
         contentView.addSubview(googleButton)
         
         NSLayoutConstraint.activate([
-            facebookButton.topAnchor.constraint(equalTo: imgLogin.bottomAnchor, constant: 10),
+            facebookButton.topAnchor.constraint(equalTo: imgLogin.bottomAnchor, constant: 20),
             facebookButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
             facebookButton.heightAnchor.constraint(equalToConstant: 50),
             facebookButton.widthAnchor.constraint(equalToConstant: calculateWithButton())
@@ -112,7 +112,7 @@ class LoginView: UIView {
         senhaTextField.delegate = self
         
         NSLayoutConstraint.activate([
-            emailTextField.topAnchor.constraint(equalTo: facebookButton.bottomAnchor, constant: 10),
+            emailTextField.topAnchor.constraint(equalTo: facebookButton.bottomAnchor, constant: 20),
             emailTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
             emailTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
             emailTextField.heightAnchor.constraint(equalToConstant: 60),
@@ -155,16 +155,13 @@ class LoginView: UIView {
         self.onForgotTap?()
     }
     
+    
     @objc
     func buttonLoginTap() {
-        self.onLoginTap?()
+        if let email = emailTextField.text, let password = senhaTextField.text {
+            self.onLoginTap?(email, password)
+        }
     }
-    
-//    func buttonLoginTap() {
-//        if let email = emailTextField.text, let password = senhaTextField.text {
-//            self.onLoginTap(email, password)
-//        }
-//    }
     
     //MARK: Functions
     private func calculateWithButton() -> CGFloat{
