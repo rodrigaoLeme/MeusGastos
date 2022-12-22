@@ -21,8 +21,8 @@ class UserBusiness: UserBusinessProtocol {
         }
     }
     
-    func register(email: String, password: String, completionHandler: @escaping (Result<UserModel, Error>) -> Void) {
-        provider.register(parameters: getParams(email, password)) { result in
+    func register(name: String, email: String, password: String, completionHandler: @escaping (Result<UserModel, Error>) -> Void) {
+        provider.register(parameters: getRegisterParams(name, email, password)) { result in
             switch result {
             case .success(let userModel):
                 completionHandler(.success(userModel))
@@ -34,6 +34,13 @@ class UserBusiness: UserBusinessProtocol {
     
     private func getParams(_ email: String, _ password: String) -> [AnyHashable: Any] {
         let userModel = UserModel(email: email, password: password)
+        let params: [AnyHashable: Any] = [Constants.ParametersKeys.body: [Constants.ParametersKeys.userModel: userModel]]
+        
+        return params
+    }
+    
+    private func getRegisterParams(_ name: String, _ email: String, _ password: String) -> [AnyHashable: Any] {
+        let userModel = UserModel(name: name, email: email, password: password)
         let params: [AnyHashable: Any] = [Constants.ParametersKeys.body: [Constants.ParametersKeys.userModel: userModel]]
         
         return params

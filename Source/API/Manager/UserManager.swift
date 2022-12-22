@@ -25,8 +25,8 @@ class UserManager: UserManagerProtocol {
         }
     }
     
-    func register(email: String, password: String, successHandler: @escaping (UserModel) -> Void, failureHandler: @escaping (Error) -> Void) {
-        business.register(email: email, password: password) { result in
+    func register(name: String, email: String, password: String, successHandler: @escaping (UserModel) -> Void, failureHandler: @escaping (Error) -> Void) {
+        business.register(name: name, email: email, password: password) { result in
             switch result {
             case .success(let userModel):
                 successHandler(userModel)

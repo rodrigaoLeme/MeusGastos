@@ -12,7 +12,7 @@ protocol UserManagerProtocol {
                successHandler: @escaping(UserModel) -> Void,
                failureHandler: @escaping(Error) -> Void)
     
-    func register(email: String, password: String,
+    func register(name: String, email: String, password: String,
                   successHandler: @escaping(UserModel) -> Void,
                   failureHandler: @escaping(Error) -> Void)
 }

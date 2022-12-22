@@ -31,7 +31,15 @@ class UserProvider: UserProviderProtocol {
             if let error = error {
                 completionHandler(.failure(error))
             } else {
-                completionHandler(.success(userModel))
+                let changeRequest = self.auth.currentUser?.createProfileChangeRequest()
+                changeRequest?.displayName = userModel.name
+                changeRequest?.commitChanges { error in
+                    if error == nil {
+                        completionHandler(.success(userModel))
+                    } else {
+                        print(error?.localizedDescription ?? "")
+                    }
+                }
             }
         }
     }
