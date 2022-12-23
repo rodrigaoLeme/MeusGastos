@@ -10,6 +10,7 @@ import UIKit
 class PresentViewController: ViewControllerDefault {
     var onSignUp: (() -> Void)?
     var onLogin: (() -> Void)?
+    var onLogged: (() -> Void)?
     
     private lazy var presentView: PresentView = {
         let view = PresentView()
@@ -27,5 +28,18 @@ class PresentViewController: ViewControllerDefault {
     
     override func loadView() {
         self.view = presentView
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.checkUserLogged()
+    }
+    
+    func checkUserLogged() {
+        let userViewModel = UserViewModel()
+        
+        if userViewModel.checkUserLogged() {
+            self.onLogged?()
+        }
     }
 }

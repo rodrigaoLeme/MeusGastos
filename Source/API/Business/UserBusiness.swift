@@ -46,4 +46,8 @@ class UserBusiness: UserBusinessProtocol {
         return params
     }
     
+    func checkUserLogged() -> Bool {
+        return provider.checkUserLogged()
+    }
+    
 }

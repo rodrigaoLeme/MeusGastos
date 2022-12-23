@@ -25,6 +25,10 @@ class PresentCoordinator: Coordinator {
             self.startLogin()
         }
         
+        viewController.onLogged = {
+            self.showHome()
+        }
+        
         
         self.navigationController.pushViewController(viewController, animated: true)
     }
@@ -36,6 +40,11 @@ class PresentCoordinator: Coordinator {
     
     private func startLogin() {
         let coordinator = LoginCoordinator(navigationController: self.navigationController)
+        coordinator.start()
+    }
+    
+    private func showHome() {
+        let coordinator = TabBarCoordinator(navigationController: self.navigationController)
         coordinator.start()
     }
 }

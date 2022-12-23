@@ -42,4 +42,10 @@ class UserViewModel {
         }
 
     }
+    
+    func checkUserLogged() -> Bool {
+        let manager = UserManager(business: UserBusiness())
+        
+        return manager.checkUserLogged()
+    }
 }

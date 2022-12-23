@@ -44,4 +44,8 @@ class UserProvider: UserProviderProtocol {
         }
     }
     
+    func checkUserLogged() -> Bool{
+        return self.auth.currentUser != nil
+    }
+    
 }

@@ -35,4 +35,8 @@ class UserManager: UserManagerProtocol {
             }
         }
     }
+    
+    func checkUserLogged() -> Bool {
+        return business.checkUserLogged()
+    }
 }

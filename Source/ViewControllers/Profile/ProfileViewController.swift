@@ -8,8 +8,14 @@
 import UIKit
 
 class ProfileViewController: ViewControllerDefault {
+    var onLogout: (()->Void)?
+    
     private lazy var profileView: ProfileView = {
         let view = ProfileView()
+        view.onLogout = {[weak self] in
+            guard let self = self else { return }
+            self.onLogout?()
+        }
         
         return view
     }()

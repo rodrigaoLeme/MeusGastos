@@ -35,7 +35,6 @@ class LoginCoordinator: Coordinator {
     }
     
     private func showHome() {
-        self.navigationController.viewControllers.removeAll()
         let coordinator = TabBarCoordinator(navigationController: self.navigationController)
         coordinator.start()
     }

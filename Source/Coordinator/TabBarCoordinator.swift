@@ -27,6 +27,11 @@ class TabBarCoordinator: Coordinator {
             profileCoordinator.profileViewController,
         ], animated: true)
         
-        self.navigationController.pushViewController(tabBarController, animated: true)
+        //self.navigationController.pushViewController(tabBarController, animated: true)
+       
+        let nav = UINavigationController(rootViewController: tabBarController)
+        nav.modalPresentationStyle = .fullScreen
+        self.navigationController.present(nav, animated: true)
+       // self.navigationController.present(tabBarController, animated: true)
     }
 }

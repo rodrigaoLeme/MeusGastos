@@ -15,6 +15,10 @@ class ProfileCoordinator: Coordinator {
         viewController.tabBarItem.image = UIImage(systemName: "person.crop.circle.fill")
         viewController.title = "Perfil"
         
+        viewController.onLogout = {
+            self.startPresent()
+        }
+        
         return viewController
     }()
     
@@ -25,5 +29,11 @@ class ProfileCoordinator: Coordinator {
     func start() {
         let viewController = ProfileViewController()
         self.navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func startPresent() {
+        //let viewController = PresentViewController()
+        //self.navigationController.pushViewController(viewController, animated: true)
+        self.navigationController.dismiss(animated: true)
     }
 }
