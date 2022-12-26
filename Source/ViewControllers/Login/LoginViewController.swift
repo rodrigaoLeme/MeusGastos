@@ -23,20 +23,26 @@ class LoginViewController: ViewControllerDefault {
             self.loginTap(email, password)
         }
         
+        view.onEditingTextView = { [weak self] textField in
+            guard let self = self else { return }
+            self.receiveTextField(textField)
+        }
+        
         return view
     }()
     
     override func loadView() {
         self.view = loginView
         
-//        self.afterHideKeyboard = {
-//            print("teclado sumiu")
-//        }
-//
-//        self.afterShowKeyboard = { heightKeyboard in
-//            print("O Teclado subiu com \(heightKeyboard) de altura")
-//        self.view.frame.origin.y -= keyboardSize.height
-//        }
+        self.afterHideKeyboard = {
+            self.view.frame.origin.y = 0.0
+        }
+        
+        self.afterShowKeyboard = { heightKeyboard in
+            /// seto o origin com 0 porque em alguns aparelhos o keyboard sugere usar alguma senha salva no icloud e isso fazia a rotina rodar duas vezes, uma com altura normal do teclado e outra com a adição da opção do icloud
+            self.view.frame.origin.y = 0.0
+            self.view.frame.origin.y -= heightKeyboard
+        }
     }
     
     func loginTap(_ email: String, _ password: String) {
@@ -52,9 +58,7 @@ class LoginViewController: ViewControllerDefault {
         }
     }
     
-//    func showMessage(_ title: String, _ message: String) {
-//        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-//        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//        self.present(alert, animated: true, completion: nil)
-//    }
+    func receiveTextField(_ sender: UITextField) {
+        print("recebendo o textField por clousure")
+    }
 }

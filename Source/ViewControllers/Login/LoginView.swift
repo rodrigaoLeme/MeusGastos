@@ -12,6 +12,7 @@ class LoginView: UIView {
     //MARK: Closures
     var onForgotTap: (() -> Void)?
     var onLoginTap: ((_ email: String, _ password: String) -> Void)?
+    var onEditingTextView: ((_ sender: UITextField) -> Void)?
     
     //MARK: Properties
     lazy var contentViewSize = CGSize(width: self.frame.width, height: self.frame.height)
@@ -171,8 +172,10 @@ class LoginView: UIView {
     func setBottomConstant() -> CGFloat {
         print(Constants.ScreenSizes.screenHeight)
         switch (Constants.ScreenSizes.screenHeight) {
-        case 932.0, 852.0:
+        case 932.0:
             return -130
+        case 844:
+            return -110
         case 667.0:
             return 0
         default:
@@ -198,6 +201,11 @@ extension LoginView: UITextFieldDelegate {
             superview?.endEditing(true)
         }
 
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        self.onEditingTextView?(textField)
         return true
     }
 }
