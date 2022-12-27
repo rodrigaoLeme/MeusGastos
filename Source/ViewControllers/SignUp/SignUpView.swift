@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import TransitionButton
 
 class SignUpView: UIView {
     //MARK: Closures
-    var onRegisterTap: ((_ name: String, _ email: String, _ password: String) -> Void)?
+    var onRegisterTap: ((_ name: String, _ email: String, _ password: String, _ button: TransitionButton) -> Void)?
     
     
     //MARK: Properts
@@ -32,7 +33,7 @@ class SignUpView: UIView {
     let emailTextField = TextFieldDefault(placeholder: "Email", keyboardType: .emailAddress)
     let senhaTextField = TextFieldDefault(placeholder: "Senha", isSecure: true)
     
-    lazy var createButton = ButtonPrimary(title: "cadastrar")
+    lazy var createButton = ButtonPrimaryTransition(title: "cadastrar")
     
     //MARK: Inits
     override init(frame: CGRect) {
@@ -133,7 +134,7 @@ class SignUpView: UIView {
     private func setCreateButton() {
         contentView.addSubview(createButton)
         
-        createButton.addTarget(self, action: #selector(registerButtonTap), for: .touchUpInside)
+        createButton.addTarget(self, action: #selector(registerButtonTap(_:)), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             //createButton.topAnchor.constraint(greaterThanOrEqualTo: senhaTextField.bottomAnchor, constant: setBottomConstant()),
@@ -161,9 +162,9 @@ class SignUpView: UIView {
     }
     
     @objc
-    func registerButtonTap() {
+    func registerButtonTap(_ button: TransitionButton) {
         if let name = nameTextField.text, let email = emailTextField.text, let password = senhaTextField.text {
-            self.onRegisterTap?(name, email, password)
+            self.onRegisterTap?(name, email, password, button)
         }
     }
     
