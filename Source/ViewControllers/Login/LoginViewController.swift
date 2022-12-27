@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import TransitionButton
 
 class LoginViewController: ViewControllerDefault {
     var onForgotTap: (() -> Void)?
@@ -19,8 +20,8 @@ class LoginViewController: ViewControllerDefault {
             self.onForgotTap?()
         }
         
-        view.onLoginTap = { email, password in
-            self.loginTap(email, password)
+        view.onLoginTap = { email, password, button in
+            self.loginTap(email, password, button)
         }
         
         view.onEditingTextView = { [weak self] textField in
@@ -45,15 +46,23 @@ class LoginViewController: ViewControllerDefault {
         }
     }
     
-    func loginTap(_ email: String, _ password: String) {
+    func loginTap(_ email: String, _ password: String, _ button: TransitionButton) {
         let userViewModel = UserViewModel()
+        
+        /// start da animação do botão
+        button.startAnimation()
         
         userViewModel.getUserFromApi(email, password) { [weak self] result in
             switch result {
             case .success(_):
-                self?.onLoginSuccess?()
+                button.stopAnimation(animationStyle: .expand) {
+                    self?.onLoginSuccess?()
+                }
             case .failure(let error):
-                self?.showMessage("Erro", error.localizedDescription)
+                button.stopAnimation(animationStyle: .shake) {
+                    self?.showMessage("Erro", error.localizedDescription)
+                }
+                
             }
         }
     }

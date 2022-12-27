@@ -7,11 +7,13 @@
 
 import Foundation
 import UIKit
+import TransitionButton
 
 class LoginView: UIView {
     //MARK: Closures
     var onForgotTap: (() -> Void)?
-    var onLoginTap: ((_ email: String, _ password: String) -> Void)?
+    //var onLoginTap: ((_ email: String, _ password: String) -> Void)?
+    var onLoginTap: ((_ email: String, _ password: String, _ button: TransitionButton) -> Void)?
     var onEditingTextView: ((_ sender: UITextField) -> Void)?
     
     //MARK: Properties
@@ -34,7 +36,7 @@ class LoginView: UIView {
     let emailTextField = TextFieldDefault(placeholder: "Email", keyboardType: .emailAddress)
     let senhaTextField = TextFieldDefault(placeholder: "Senha", isSecure: true)
     
-    lazy var loginButton = ButtonPrimary(title: "Entrar")
+    lazy var loginButton = ButtonPrimary2(title: "Entrar")
     lazy var forgotPasswordButton = ButtonTextOnly(title: "Esqueci a senha :/")
     
     //MARK: Inits
@@ -140,7 +142,7 @@ class LoginView: UIView {
     private func setLoginButton() {
         contentView.addSubview(loginButton)
         
-        loginButton.addTarget(self, action: #selector(buttonLoginTap), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(buttonLoginTap(_:)), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             loginButton.bottomAnchor.constraint(equalTo: forgotPasswordButton.topAnchor, constant: 10),
@@ -157,10 +159,17 @@ class LoginView: UIView {
     }
     
     
+//    @objc
+//    func buttonLoginTap() {
+//        if let email = emailTextField.text, let password = senhaTextField.text {
+//            self.onLoginTap?(email, password)
+//        }
+//    }
+    
     @objc
-    func buttonLoginTap() {
+    func buttonLoginTap(_ button: TransitionButton) {
         if let email = emailTextField.text, let password = senhaTextField.text {
-            self.onLoginTap?(email, password)
+            self.onLoginTap?(email, password, button)
         }
     }
     

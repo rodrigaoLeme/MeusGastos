@@ -31,6 +31,7 @@ class TabBarCoordinator: Coordinator {
        
         let nav = UINavigationController(rootViewController: tabBarController)
         nav.modalPresentationStyle = .fullScreen
+        nav.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
         self.navigationController.present(nav, animated: true)
        // self.navigationController.present(tabBarController, animated: true)
     }

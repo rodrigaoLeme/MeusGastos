@@ -8,5 +8,6 @@ target 'MeusGastos' do
   # Pods for MeusGastos
 pod 'FirebaseAuth'
 pod 'FirebaseAnalytics'
+pod 'TransitionButton'
 
 end
