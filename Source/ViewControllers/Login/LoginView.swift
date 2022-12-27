@@ -36,7 +36,7 @@ class LoginView: UIView {
     let emailTextField = TextFieldDefault(placeholder: "Email", keyboardType: .emailAddress)
     let senhaTextField = TextFieldDefault(placeholder: "Senha", isSecure: true)
     
-    lazy var loginButton = ButtonPrimary2(title: "Entrar")
+    lazy var loginButton = ButtonPrimaryTransition(title: "Entrar")
     lazy var forgotPasswordButton = ButtonTextOnly(title: "Esqueci a senha :/")
     
     //MARK: Inits

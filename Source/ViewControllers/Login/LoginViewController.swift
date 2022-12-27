@@ -55,6 +55,7 @@ class LoginViewController: ViewControllerDefault {
         userViewModel.getUserFromApi(email, password) { [weak self] result in
             switch result {
             case .success(_):
+                self?.view.endEditing(true)
                 button.stopAnimation(animationStyle: .expand) {
                     self?.onLoginSuccess?()
                 }

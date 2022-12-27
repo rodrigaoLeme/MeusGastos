@@ -29,7 +29,7 @@ class ButtonPrimary: UIButton {
     }
 }
 
-class ButtonPrimary2: TransitionButton {
+class ButtonPrimaryTransition: TransitionButton {
     init(title: String) {
         super.init(frame: .zero)
         
