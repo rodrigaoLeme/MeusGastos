@@ -50,6 +50,10 @@ class UserBusiness: UserBusinessProtocol {
         return provider.checkUserLogged()
     }
     
+    func logout() -> Bool {
+        return provider.logout()
+    }
+    
     func getUserDetails() -> [TypeOfUserDetail: String] {
         return provider.getUserDetaisl()
     }

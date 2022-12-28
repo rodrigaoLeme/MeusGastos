@@ -55,6 +55,16 @@ class UserProvider: UserProviderProtocol {
         return self.auth.currentUser != nil
     }
     
+    func logout() -> Bool {
+        do {
+            try Auth.auth().signOut()
+            return true
+        } catch let err {
+            print(err)
+            return false
+        }
+    }
+    
     func getUserDetaisl() -> [TypeOfUserDetail: String] {
         var user = [TypeOfUserDetail: String]()
         if self.auth.currentUser != nil {

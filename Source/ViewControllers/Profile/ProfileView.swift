@@ -6,11 +6,11 @@
 //
 
 import UIKit
-import FirebaseAuth
+import TransitionButton
 
 class ProfileView: UIView {
     //MARK: Closures
-    var onLogout: (() -> Void)?
+    var onLogout: ((_ : TransitionButton) -> Void)?
     
     //MARK: Properts
     let userViewModel = UserViewModel()
@@ -22,8 +22,8 @@ class ProfileView: UIView {
         return lb
     }()
     
-    lazy var btnLogout: ButtonDefault = {
-        let btn = ButtonDefault(title: "Logout")
+    lazy var btnLogout: ButtonPrimaryTransition = {
+        let btn = ButtonPrimaryTransition(title: "Logout")
         
         return btn
     }()
@@ -44,7 +44,7 @@ class ProfileView: UIView {
     private func setButtonLogout() {
         self.addSubview(btnLogout)
         
-        btnLogout.addTarget(self, action: #selector(logoutTap), for: .touchUpInside)
+        btnLogout.addTarget(self, action: #selector(logoutTap(_:)), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             btnLogout.centerXAnchor.constraint(equalTo: self.centerXAnchor),
@@ -69,13 +69,8 @@ class ProfileView: UIView {
     }
     
     @objc
-    private func logoutTap() {
-        do {
-            try Auth.auth().signOut()
-            onLogout?()
-        } catch let err {
-            print(err)
-        }
+    private func logoutTap(_ sender: TransitionButton) {
+        onLogout?(sender)
     }    
     
     required init?(coder: NSCoder) {

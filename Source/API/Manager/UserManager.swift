@@ -40,6 +40,10 @@ class UserManager: UserManagerProtocol {
         return business.checkUserLogged()
     }
     
+    func logout() -> Bool {
+        return business.logout()
+    }
+    
     func getUserDetails() -> [TypeOfUserDetail: String] {
         return business.getUserDetails()
     }

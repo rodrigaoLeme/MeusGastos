@@ -49,6 +49,12 @@ class UserViewModel {
         return manager.checkUserLogged()
     }
     
+    func logout() -> Bool {
+        let manager = UserManager(business: UserBusiness())
+        
+        return manager.logout()
+    }
+    
     func getUserDetails() -> [TypeOfUserDetail: String] {
         let manager = UserManager(business: UserBusiness())
         
