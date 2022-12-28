@@ -50,4 +50,8 @@ class UserBusiness: UserBusinessProtocol {
         return provider.checkUserLogged()
     }
     
+    func getUserDetails() -> [TypeOfUserDetail: String] {
+        return provider.getUserDetaisl()
+    }
+    
 }

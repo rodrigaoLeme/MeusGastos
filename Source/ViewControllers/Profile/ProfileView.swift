@@ -13,6 +13,15 @@ class ProfileView: UIView {
     var onLogout: (() -> Void)?
     
     //MARK: Properts
+    let userViewModel = UserViewModel()
+    var currentUser = [TypeOfUserDetail: String]()
+    
+    lazy var helloMessage: LabelDefault = {
+        let lb = LabelDefault(text: "Olá, Lorem Ipsum", font: .systemFont(ofSize: 18, weight: .bold))
+        
+        return lb
+    }()
+    
     lazy var btnLogout: ButtonDefault = {
         let btn = ButtonDefault(title: "Logout")
         
@@ -22,12 +31,14 @@ class ProfileView: UIView {
     //MARK: Inits
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.currentUser = userViewModel.getUserDetails()
         
         self.setVisualElements()
     }
     
     private func setVisualElements() {
         setButtonLogout()
+        setHelloMessage()
     }
     
     private func setButtonLogout() {
@@ -44,6 +55,19 @@ class ProfileView: UIView {
         ])
     }
     
+    private func setHelloMessage() {
+        self.addSubview(helloMessage)
+        
+        if let currentDisplayName = currentUser[.displayName] {
+            helloMessage.text = "Olá, \(currentDisplayName)"
+        }
+        
+        NSLayoutConstraint.activate([
+            helloMessage.bottomAnchor.constraint(equalTo: btnLogout.topAnchor, constant: -20),
+            helloMessage.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+        ])
+    }
+    
     @objc
     private func logoutTap() {
         do {
@@ -52,8 +76,7 @@ class ProfileView: UIView {
         } catch let err {
             print(err)
         }
-    }
-    
+    }    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

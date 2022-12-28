@@ -39,4 +39,8 @@ class UserManager: UserManagerProtocol {
     func checkUserLogged() -> Bool {
         return business.checkUserLogged()
     }
+    
+    func getUserDetails() -> [TypeOfUserDetail: String] {
+        return business.getUserDetails()
+    }
 }

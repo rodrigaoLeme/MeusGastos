@@ -8,6 +8,13 @@
 import Foundation
 import FirebaseAuth
 
+enum TypeOfUserDetail: String {
+    case email = "email"
+    case displayName = "displayName"
+    case phoneNumber = "phoneNumber"
+    case photoURL = "photoURL"
+}
+
 class UserProvider: UserProviderProtocol {
     lazy var auth = Auth.auth()
     func login(parameters: [AnyHashable : Any], completionHandler: @escaping (Result<UserModel, Error>) -> Void) {
@@ -48,4 +55,15 @@ class UserProvider: UserProviderProtocol {
         return self.auth.currentUser != nil
     }
     
+    func getUserDetaisl() -> [TypeOfUserDetail: String] {
+        var user = [TypeOfUserDetail: String]()
+        if self.auth.currentUser != nil {
+            user[.email] = self.auth.currentUser!.email
+            user[.displayName] = self.auth.currentUser!.displayName
+            user[.phoneNumber] = self.auth.currentUser!.phoneNumber
+            user[.photoURL] = "\(String(describing: self.auth.currentUser!.photoURL))"
+        }
+        
+        return user
+    }
 }

@@ -26,5 +26,11 @@ struct Constants {
     struct ParametersKeys {
         static let body = "body"
         static let userModel = "userModel"
-    } 
+    }
+    
+    struct UserDetails {
+        let userViewModel = UserViewModel()
+        
+        
+    }
 }

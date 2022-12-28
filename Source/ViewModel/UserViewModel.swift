@@ -48,4 +48,10 @@ class UserViewModel {
         
         return manager.checkUserLogged()
     }
+    
+    func getUserDetails() -> [TypeOfUserDetail: String] {
+        let manager = UserManager(business: UserBusiness())
+        
+        return manager.getUserDetails()
+    }
 }
