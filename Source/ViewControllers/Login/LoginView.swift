@@ -12,7 +12,6 @@ import TransitionButton
 class LoginView: UIView {
     //MARK: Closures
     var onForgotTap: (() -> Void)?
-    //var onLoginTap: ((_ email: String, _ password: String) -> Void)?
     var onLoginTap: ((_ email: String, _ password: String, _ button: TransitionButton) -> Void)?
     var onEditingTextView: ((_ sender: UITextField) -> Void)?
     
@@ -131,6 +130,8 @@ class LoginView: UIView {
     private func setForgotButton() {
         contentView.addSubview(forgotPasswordButton)
         
+        forgotPasswordButton.addTarget(self, action: #selector(buttonForgotTap), for: .touchUpInside)
+        
         NSLayoutConstraint.activate([
             forgotPasswordButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             forgotPasswordButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
@@ -157,14 +158,6 @@ class LoginView: UIView {
     func buttonForgotTap() {
         self.onForgotTap?()
     }
-    
-    
-//    @objc
-//    func buttonLoginTap() {
-//        if let email = emailTextField.text, let password = senhaTextField.text {
-//            self.onLoginTap?(email, password)
-//        }
-//    }
     
     @objc
     func buttonLoginTap(_ button: TransitionButton) {

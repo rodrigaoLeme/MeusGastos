@@ -22,11 +22,20 @@ class LoginCoordinator: Coordinator {
             self.showHome()
         }
         
+        viewController.onForgotTap = {
+            self.showForgotPassword()
+        }
+        
         self.navigationController.pushViewController(viewController, animated: true)
     }
     
     private func showHome() {
         let coordinator = TabBarCoordinator(navigationController: self.navigationController)
+        coordinator.start()
+    }
+    
+    private func showForgotPassword() {
+        let coordinator = ForgotPasswordCoordinator(navigationController: self.navigationController)
         coordinator.start()
     }
     
