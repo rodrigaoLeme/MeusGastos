@@ -49,6 +49,9 @@
 		1A5F8D0C29398F4800525AD7 /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5F8D0B29398F4800525AD7 /* TransactionModel.swift */; };
 		1A5F8D0E293991C200525AD7 /* TransactionVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5F8D0D293991C200525AD7 /* TransactionVIewModel.swift */; };
 		1AC26E81295080A900D30FDC /* ButtonTextOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC26E80295080A900D30FDC /* ButtonTextOnly.swift */; };
+		1AD09E402980226000D1CDBD /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD09E3F2980226000D1CDBD /* ForgotPasswordViewController.swift */; };
+		1AD09E422980226C00D1CDBD /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD09E412980226C00D1CDBD /* ForgotPasswordView.swift */; };
+		1AD09E44298023FD00D1CDBD /* ForgotPasswordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD09E43298023FD00D1CDBD /* ForgotPasswordCoordinator.swift */; };
 		1AD1B6FD293CE18500735F17 /* LancamentosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD1B6FC293CE18500735F17 /* LancamentosTableViewCell.swift */; };
 		1AD1B7502943656300735F17 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD1B74F2943656300735F17 /* TabBarController.swift */; };
 		1AD1B752294365D800735F17 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD1B751294365D800735F17 /* TabBarCoordinator.swift */; };
@@ -106,6 +109,9 @@
 		1A5F8D0B29398F4800525AD7 /* TransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
 		1A5F8D0D293991C200525AD7 /* TransactionVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionVIewModel.swift; sourceTree = "<group>"; };
 		1AC26E80295080A900D30FDC /* ButtonTextOnly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTextOnly.swift; sourceTree = "<group>"; };
+		1AD09E3F2980226000D1CDBD /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		1AD09E412980226C00D1CDBD /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		1AD09E43298023FD00D1CDBD /* ForgotPasswordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordCoordinator.swift; sourceTree = "<group>"; };
 		1AD1B6FC293CE18500735F17 /* LancamentosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LancamentosTableViewCell.swift; sourceTree = "<group>"; };
 		1AD1B74F2943656300735F17 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		1AD1B751294365D800735F17 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
@@ -249,6 +255,7 @@
 		1A39BE6B29245B9000A5543B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1AD09E3E2980223200D1CDBD /* ForgotPassword */,
 				1ADB58562954D1D200C7E822 /* Profile */,
 				1AD1B7532943661600735F17 /* Categories */,
 				1AD1B6FB293CE15C00735F17 /* Cell */,
@@ -272,6 +279,7 @@
 				1A08B103294A055800EA4025 /* SignUpCoordinator.swift */,
 				1AD1B751294365D800735F17 /* TabBarCoordinator.swift */,
 				1ADB58542954D13F00C7E822 /* ProfileCoordinator.swift */,
+				1AD09E43298023FD00D1CDBD /* ForgotPasswordCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -398,6 +406,15 @@
 				1A5F8CE92936EC7E00525AD7 /* TextFieldDefault.swift */,
 			);
 			path = TextFields;
+			sourceTree = "<group>";
+		};
+		1AD09E3E2980223200D1CDBD /* ForgotPassword */ = {
+			isa = PBXGroup;
+			children = (
+				1AD09E3F2980226000D1CDBD /* ForgotPasswordViewController.swift */,
+				1AD09E412980226C00D1CDBD /* ForgotPasswordView.swift */,
+			);
+			path = ForgotPassword;
 			sourceTree = "<group>";
 		};
 		1AD1B6FB293CE15C00735F17 /* Cell */ = {
@@ -575,6 +592,7 @@
 				1A39BE6E29245BD400A5543B /* Coordinator.swift in Sources */,
 				1A08B106294A0CB100EA4025 /* ButtonSocialMedias.swift in Sources */,
 				1A08B0F72948F23400EA4025 /* PresentViewController.swift in Sources */,
+				1AD09E422980226C00D1CDBD /* ForgotPasswordView.swift in Sources */,
 				1A5F8D0C29398F4800525AD7 /* TransactionModel.swift in Sources */,
 				1ADB58582954D1EF00C7E822 /* ProfileViewController.swift in Sources */,
 				1A08B109294A12D300EA4025 /* Constants.swift in Sources */,
@@ -600,6 +618,8 @@
 				1ADB585A2954D21400C7E822 /* ProfileView.swift in Sources */,
 				1A5F8CEA2936EC7E00525AD7 /* TextFieldDefault.swift in Sources */,
 				1A08B100294A051400EA4025 /* SignUpView.swift in Sources */,
+				1AD09E44298023FD00D1CDBD /* ForgotPasswordCoordinator.swift in Sources */,
+				1AD09E402980226000D1CDBD /* ForgotPasswordViewController.swift in Sources */,
 				1AD1B6FD293CE18500735F17 /* LancamentosTableViewCell.swift in Sources */,
 				1A08B0F52948F21A00EA4025 /* PresentView.swift in Sources */,
 				1A15FC672950FD6E00892DD1 /* UserProvider.swift in Sources */,
