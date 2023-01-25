@@ -63,12 +63,21 @@ class ForgotPasswordView: UIView {
     private func setForgotButton() {
         self.addSubview(forgotButton)
         
+        forgotButton.addTarget(self, action: #selector(buttonForgotTap(_:)), for: .touchUpInside)
+        
         NSLayoutConstraint.activate([
             forgotButton.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20),
             forgotButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 24),
             forgotButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -24),
             forgotButton.heightAnchor.constraint(equalToConstant: 60)
         ])
+    }
+    
+    @objc
+    func buttonForgotTap(_ sender: TransitionButton) {
+        if let email = emailTextField.text {
+            self.onSendEmailTap?(email, sender)
+        }
     }
     
     

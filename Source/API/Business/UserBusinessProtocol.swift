@@ -13,4 +13,5 @@ protocol UserBusinessProtocol {
     func checkUserLogged() -> Bool
     func logout() -> Bool
     func getUserDetails() -> [TypeOfUserDetail: String]
+    func resendPassword(email: String, completionHandler: @escaping(Result<Bool, Error>) -> Void)
 }

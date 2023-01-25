@@ -8,6 +8,7 @@
 import Foundation
 
 class UserBusiness: UserBusinessProtocol {
+    
     let provider: UserProvider = UserProvider()
     
     func login(email: String, password: String, completionHandler: @escaping (Result<UserModel, Error>) -> Void) {
@@ -58,4 +59,14 @@ class UserBusiness: UserBusinessProtocol {
         return provider.getUserDetaisl()
     }
     
+    func resendPassword(email: String, completionHandler: @escaping (Result<Bool, Error>) -> Void) {
+        provider.resendPassword(email: email) { result in
+            switch result {
+            case .success(let ret):
+                completionHandler(.success(ret))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
+    }
 }

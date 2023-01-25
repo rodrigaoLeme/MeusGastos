@@ -8,6 +8,7 @@
 import Foundation
 
 class UserManager: UserManagerProtocol {
+    
     let business: UserBusinessProtocol
     
     init(business: UserBusinessProtocol) {
@@ -46,5 +47,16 @@ class UserManager: UserManagerProtocol {
     
     func getUserDetails() -> [TypeOfUserDetail: String] {
         return business.getUserDetails()
+    }
+    
+    func resendPassword(email: String, successHandler: @escaping (Bool) -> Void, failureHandler: @escaping (Error) -> Void) {
+        business.resendPassword(email: email) { result in
+            switch result {
+            case .success(let ret):
+                successHandler(ret)
+            case .failure(let error):
+                failureHandler(error)
+            }
+        }
     }
 }

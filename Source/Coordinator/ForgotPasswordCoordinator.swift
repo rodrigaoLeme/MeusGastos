@@ -16,6 +16,15 @@ class ForgotPasswordCoordinator: Coordinator {
     
     func start() {
         let viewController = ForgotPasswordViewController()
+        
+        viewController.onBackToLogin = {
+            self.showLogin()
+        }
+        
         self.navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    private func showLogin() {
+        self.navigationController.popViewController(animated: true)
     }
 }

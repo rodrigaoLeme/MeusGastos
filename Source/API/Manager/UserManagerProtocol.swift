@@ -15,4 +15,8 @@ protocol UserManagerProtocol {
     func register(name: String, email: String, password: String,
                   successHandler: @escaping(UserModel) -> Void,
                   failureHandler: @escaping(Error) -> Void)
+    
+    func resendPassword(email: String,
+                        successHandler: @escaping(Bool) -> Void,
+                        failureHandler: @escaping(Error) -> Void)
 }

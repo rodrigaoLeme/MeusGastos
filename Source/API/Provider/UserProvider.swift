@@ -51,6 +51,17 @@ class UserProvider: UserProviderProtocol {
         }
     }
     
+    func resendPassword(email: String, completionHandler: @escaping(Result<Bool, Error>) -> Void) {
+        self.auth.languageCode = "pt-br"
+        self.auth.sendPasswordReset(withEmail: email) { error in
+            if let error = error {
+                completionHandler(.failure(error))
+            } else {
+                completionHandler(.success(true))
+            }
+        }
+    }
+    
     func checkUserLogged() -> Bool{
         return self.auth.currentUser != nil
     }

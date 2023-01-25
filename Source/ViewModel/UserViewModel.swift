@@ -60,4 +60,15 @@ class UserViewModel {
         
         return manager.getUserDetails()
     }
+    
+    func resendPassword(_ email: String, completion: @escaping(Result<Bool, Error>) -> Void) {
+        let manager = UserManager(business: UserBusiness())
+        
+        manager.resendPassword(email: email) { ret in
+            completion(.success(ret))
+        } failureHandler: { error in
+            completion(.failure(error))
+        }
+
+    }
 }
