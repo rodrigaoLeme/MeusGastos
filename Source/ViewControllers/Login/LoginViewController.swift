@@ -12,6 +12,7 @@ import TransitionButton
 class LoginViewController: ViewControllerDefault {
     var onForgotTap: (() -> Void)?
     var onLoginSuccess: (() -> Void)?
+    var onFacebookTap: (() -> Void)?
     
     lazy var loginView: LoginView = {
        let view = LoginView()
@@ -27,6 +28,11 @@ class LoginViewController: ViewControllerDefault {
         view.onEditingTextView = { [weak self] textField in
             guard let self = self else { return }
             self.receiveTextField(textField)
+        }
+        
+        view.onFacebookTap = {[weak self] in
+            guard let self = self else { return }
+            self.loginFacebook()
         }
         
         return view
@@ -64,6 +70,20 @@ class LoginViewController: ViewControllerDefault {
                     self?.showMessage("Erro", error.localizedDescription)
                 }
                 
+            }
+        }
+    }
+    
+    func loginFacebook() {
+        print("facebook tapped")
+        let userViewModel = UserViewModel()
+        
+        userViewModel.registerFacebook { [weak self] result in
+            switch result {
+            case .success(_):
+                self?.onFacebookTap?()
+            case .failure(let error):
+                self?.showMessage("Erro", error.localizedDescription)
             }
         }
     }

@@ -26,6 +26,10 @@ class LoginCoordinator: Coordinator {
             self.showForgotPassword()
         }
         
+        viewController.onFacebookTap = {
+            self.showHome()
+        }
+        
         self.navigationController.pushViewController(viewController, animated: true)
     }
     

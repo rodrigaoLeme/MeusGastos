@@ -40,7 +40,19 @@ class UserViewModel {
         } failureHandler: { error in
             completion(.failure(error))
         }
-
+    }
+    
+    func registerFacebook(completionHandler: @escaping(Result<Bool, Error>) -> Void) {
+        let manager = UserManager(business: UserBusiness())
+        
+        manager.registerFacebook { result in
+            switch result {
+            case .success(_):
+                completionHandler(.success(true))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
     }
     
     func checkUserLogged() -> Bool {

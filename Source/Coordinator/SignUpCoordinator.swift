@@ -21,11 +21,15 @@ class SignUpCoordinator: Coordinator {
             self.homeStart()
         }
         
+        viewController.onFacebookTap = {
+            self.homeStart()
+        }
+        
         self.navigationController.pushViewController(viewController, animated: true)
     }
     
     private func homeStart() {
-        self.navigationController.viewControllers.removeAll()
+        //self.navigationController.viewControllers.removeAll()
         
         let coordinator = TabBarCoordinator(navigationController: self.navigationController)
         coordinator.start()

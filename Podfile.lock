@@ -1,4 +1,20 @@
 PODS:
+  - FacebookCore (0.9.0):
+    - FBSDKCoreKit (~> 5.0)
+  - FacebookLogin (0.9.0):
+    - FacebookCore (~> 0.9.0)
+    - FBSDKCoreKit (~> 5.0)
+    - FBSDKLoginKit (~> 5.0)
+  - FBSDKCoreKit (5.15.1):
+    - FBSDKCoreKit/Basics (= 5.15.1)
+    - FBSDKCoreKit/Core (= 5.15.1)
+  - FBSDKCoreKit/Basics (5.15.1)
+  - FBSDKCoreKit/Core (5.15.1):
+    - FBSDKCoreKit/Basics
+  - FBSDKLoginKit (5.15.1):
+    - FBSDKLoginKit/Login (= 5.15.1)
+  - FBSDKLoginKit/Login (5.15.1):
+    - FBSDKCoreKit (~> 5.0)
   - FirebaseAnalytics (10.3.0):
     - FirebaseAnalytics/AdIdSupport (= 10.3.0)
     - FirebaseCore (~> 10.0)
@@ -82,12 +98,17 @@ PODS:
   - TransitionButton (0.5.3)
 
 DEPENDENCIES:
+  - FacebookLogin
   - FirebaseAnalytics
   - FirebaseAuth
   - TransitionButton
 
 SPEC REPOS:
   trunk:
+    - FacebookCore
+    - FacebookLogin
+    - FBSDKCoreKit
+    - FBSDKLoginKit
     - FirebaseAnalytics
     - FirebaseAuth
     - FirebaseCore
@@ -101,6 +122,10 @@ SPEC REPOS:
     - TransitionButton
 
 SPEC CHECKSUMS:
+  FacebookCore: ba86524b66cfa86d0f8e65d08faa8504a9f732dd
+  FacebookLogin: 6cee9fd6e1fe976fe8f7eec199e27b28b14f5d63
+  FBSDKCoreKit: 1d5acf7c9d7a2f92bb1a242dc60cae5b7adb91df
+  FBSDKLoginKit: f1ea8026a58b52d30c9f2e6a58ca7d813619fb83
   FirebaseAnalytics: 036232b6a1e2918e5f67572417be1173576245f3
   FirebaseAuth: 0e415d29d846c1dce2fb641e46f35e9888d9bec6
   FirebaseCore: 988754646ab3bd4bdcb740f1bfe26b9f6c0d5f2a
@@ -113,6 +138,6 @@ SPEC CHECKSUMS:
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
   TransitionButton: 36283346e17c64775a1b3bc3a7a72940a367de1f
 
-PODFILE CHECKSUM: ef738ed82bcaf79440817d69dcd86aedf1e8902b
+PODFILE CHECKSUM: 84fdcfa2ba0850b127d0ea452fbb03d4cae42292
 
 COCOAPODS: 1.11.3

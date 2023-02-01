@@ -11,6 +11,7 @@ import TransitionButton
 class SignUpView: UIView {
     //MARK: Closures
     var onRegisterTap: ((_ name: String, _ email: String, _ password: String, _ button: TransitionButton) -> Void)?
+    var onRegisterFacebookTap: (()->Void)?
     
     
     //MARK: Properts
@@ -83,6 +84,8 @@ class SignUpView: UIView {
     private func setSocialMediaButtons() {
         contentView.addSubview(facebookButton)
         contentView.addSubview(googleButton)
+        
+        facebookButton.addTarget(self, action: #selector(registerFacebookTap), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             facebookButton.topAnchor.constraint(equalTo: imgSignUp.bottomAnchor, constant: 10),
@@ -159,6 +162,11 @@ class SignUpView: UIView {
         default:
             return -60
         }
+    }
+    
+    @objc
+    func registerFacebookTap() {
+        self.onRegisterFacebookTap?()
     }
     
     @objc

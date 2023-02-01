@@ -33,6 +33,19 @@ class UserBusiness: UserBusinessProtocol {
         }
     }
     
+    func registerFacebook(completionHandler: @escaping (Result<Bool, Error>) -> Void) {
+        provider.registerFacebook { result in
+            switch result {
+            case .success(_):
+                completionHandler(.success(true))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
+    }
+
+
+
     private func getParams(_ email: String, _ password: String) -> [AnyHashable: Any] {
         let userModel = UserModel(email: email, password: password)
         let params: [AnyHashable: Any] = [Constants.ParametersKeys.body: [Constants.ParametersKeys.userModel: userModel]]

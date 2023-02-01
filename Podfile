@@ -9,5 +9,6 @@ target 'MeusGastos' do
 pod 'FirebaseAuth'
 pod 'FirebaseAnalytics'
 pod 'TransitionButton'
+pod 'FacebookLogin'
 
 end

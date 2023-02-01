@@ -14,6 +14,7 @@ class LoginView: UIView {
     var onForgotTap: (() -> Void)?
     var onLoginTap: ((_ email: String, _ password: String, _ button: TransitionButton) -> Void)?
     var onEditingTextView: ((_ sender: UITextField) -> Void)?
+    var onFacebookTap: (() -> Void)?
     
     //MARK: Properties
     lazy var contentViewSize = CGSize(width: self.frame.width, height: self.frame.height)
@@ -87,6 +88,8 @@ class LoginView: UIView {
     private func setSocialMediaButtons() {
         contentView.addSubview(facebookButton)
         contentView.addSubview(googleButton)
+        
+        facebookButton.addTarget(self, action: #selector(buttonFacebookTap), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             facebookButton.topAnchor.constraint(equalTo: imgLogin.bottomAnchor, constant: 20),
@@ -164,6 +167,11 @@ class LoginView: UIView {
         if let email = emailTextField.text, let password = senhaTextField.text {
             self.onLoginTap?(email, password, button)
         }
+    }
+    
+    @objc
+    func buttonFacebookTap() {
+        self.onFacebookTap?()
     }
     
     //MARK: Functions

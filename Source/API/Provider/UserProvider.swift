@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseAuth
+import FacebookLogin
 
 enum TypeOfUserDetail: String {
     case email = "email"
@@ -47,6 +48,29 @@ class UserProvider: UserProviderProtocol {
                         print(error?.localizedDescription ?? "")
                     }
                 }
+            }
+        }
+    }
+    
+    func registerFacebook(completionHandler: @escaping (Result<Bool, Error>) -> Void) {
+        let loginManager = LoginManager()
+        loginManager.logOut()
+        loginManager.logIn(permissions: [.email, .publicProfile], viewController: nil) { result in
+            switch result {
+            case .success(granted: _, declined: _, token: let token):
+                let credential = FacebookAuthProvider.credential(withAccessToken: token.tokenString)
+                self.auth.languageCode = "pt-br"
+                self.auth.signIn(with: credential) { result, error in
+                    if let error = error {
+                        completionHandler(.failure(error))
+                    } else {
+                        completionHandler(.success(true))
+                    }
+                }
+            case .cancelled:
+                break
+            case .failed(let error):
+                completionHandler(.failure(error))
             }
         }
     }

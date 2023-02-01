@@ -10,6 +10,7 @@ import Foundation
 protocol UserBusinessProtocol {
     func login(email: String, password: String, completionHandler: @escaping(Result<UserModel, Error>) -> Void)
     func register(name: String, email: String, password: String, completionHandler: @escaping(Result<UserModel, Error>) -> Void)
+    func registerFacebook(completionHandler: @escaping (Result<Bool, Error>) -> Void)
     func checkUserLogged() -> Bool
     func logout() -> Bool
     func getUserDetails() -> [TypeOfUserDetail: String]

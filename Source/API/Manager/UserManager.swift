@@ -37,6 +37,17 @@ class UserManager: UserManagerProtocol {
         }
     }
     
+    func registerFacebook(completionHandler: @escaping (Result<Bool, Error>) -> Void) {
+        business.registerFacebook { result in
+            switch result {
+            case .success(_):
+                completionHandler(.success(true))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
+    }
+    
     func checkUserLogged() -> Bool {
         return business.checkUserLogged()
     }
