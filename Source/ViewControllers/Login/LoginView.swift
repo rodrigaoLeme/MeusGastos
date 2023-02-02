@@ -15,6 +15,7 @@ class LoginView: UIView {
     var onLoginTap: ((_ email: String, _ password: String, _ button: TransitionButton) -> Void)?
     var onEditingTextView: ((_ sender: UITextField) -> Void)?
     var onFacebookTap: (() -> Void)?
+    var onGoogleTap: (() -> Void)?
     
     //MARK: Properties
     lazy var contentViewSize = CGSize(width: self.frame.width, height: self.frame.height)
@@ -90,6 +91,7 @@ class LoginView: UIView {
         contentView.addSubview(googleButton)
         
         facebookButton.addTarget(self, action: #selector(buttonFacebookTap), for: .touchUpInside)
+        googleButton.addTarget(self, action: #selector(buttonGoogleTap), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             facebookButton.topAnchor.constraint(equalTo: imgLogin.bottomAnchor, constant: 20),
@@ -172,6 +174,11 @@ class LoginView: UIView {
     @objc
     func buttonFacebookTap() {
         self.onFacebookTap?()
+    }
+    
+    @objc
+    func buttonGoogleTap() {
+        self.onGoogleTap?()
     }
     
     //MARK: Functions

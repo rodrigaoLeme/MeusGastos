@@ -13,6 +13,7 @@ class LoginViewController: ViewControllerDefault {
     var onForgotTap: (() -> Void)?
     var onLoginSuccess: (() -> Void)?
     var onFacebookTap: (() -> Void)?
+    var onGoogleTap: (() -> Void)?
     
     lazy var loginView: LoginView = {
        let view = LoginView()
@@ -33,6 +34,11 @@ class LoginViewController: ViewControllerDefault {
         view.onFacebookTap = {[weak self] in
             guard let self = self else { return }
             self.loginFacebook()
+        }
+        
+        view.onGoogleTap = {[weak self] in
+            guard let self = self else { return }
+            self.loginGoogle()
         }
         
         return view
@@ -75,7 +81,6 @@ class LoginViewController: ViewControllerDefault {
     }
     
     func loginFacebook() {
-        print("facebook tapped")
         let userViewModel = UserViewModel()
         
         userViewModel.registerFacebook { [weak self] result in
@@ -86,6 +91,10 @@ class LoginViewController: ViewControllerDefault {
                 self?.showMessage("Erro", error.localizedDescription)
             }
         }
+    }
+    
+    func loginGoogle() {
+        print("google tap 2")
     }
     
     func receiveTextField(_ sender: UITextField) {
