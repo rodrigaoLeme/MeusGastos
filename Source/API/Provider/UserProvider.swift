@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseAuth
 import FacebookLogin
+import GoogleSignIn
 
 enum TypeOfUserDetail: String {
     case email = "email"
@@ -71,6 +72,17 @@ class UserProvider: UserProviderProtocol {
                 break
             case .failed(let error):
                 completionHandler(.failure(error))
+            }
+        }
+    }
+    
+    func registerGoogle(signResult: GIDSignInResult, completionHandler: @escaping (Result<Bool, Error>) -> Void) {
+        let credential = GoogleAuthProvider.credential(withIDToken: signResult.user.idToken!.tokenString, accessToken: signResult.user.accessToken.tokenString)
+        self.auth.signIn(with: credential) { result, error in
+            if let error = error {
+                completionHandler(.failure(error))
+            } else {
+                completionHandler(.success(true))
             }
         }
     }

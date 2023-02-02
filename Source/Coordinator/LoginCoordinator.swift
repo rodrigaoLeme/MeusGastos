@@ -30,6 +30,10 @@ class LoginCoordinator: Coordinator {
             self.showHome()
         }
         
+        viewController.onGoogleTap = {
+            self.showHome()
+        }
+        
         self.navigationController.pushViewController(viewController, animated: true)
     }
     

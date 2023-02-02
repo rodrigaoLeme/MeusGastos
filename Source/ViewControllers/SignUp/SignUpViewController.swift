@@ -7,6 +7,8 @@
 
 import UIKit
 import TransitionButton
+import GoogleSignIn
+import FirebaseCore
 
 class SignUpViewController: ViewControllerDefault {
     //MARK: Clousures
@@ -86,6 +88,26 @@ class SignUpViewController: ViewControllerDefault {
     }
     
     func registerGoogle() {
-        print("google tap")
+        let userViewModel = UserViewModel()
+        
+        GIDSignIn.sharedInstance.signOut()
+        
+        guard let clientId = FirebaseApp.app()?.options.clientID else { return }
+        let config = GIDConfiguration(clientID: clientId)
+        GIDSignIn.sharedInstance.configuration = config
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { result, error in
+            if let error = error {
+                self.showMessage("Erro", error.localizedDescription)
+            } else {
+                userViewModel.registerGoogle(signResult: result!) {[weak self] resultado in
+                    switch resultado {
+                    case .success(_):
+                        self?.onGoogleTap?()
+                    case .failure(let error):
+                        self?.showMessage("Erro", error.localizedDescription)
+                    }
+                }
+            }
+        }
     }
 }

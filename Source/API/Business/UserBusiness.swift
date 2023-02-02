@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import GoogleSignIn
 
 class UserBusiness: UserBusinessProtocol {
     
@@ -44,7 +45,16 @@ class UserBusiness: UserBusinessProtocol {
         }
     }
 
-
+    func registerGoogle(signResult: GIDSignInResult, completionHandler: @escaping (Result<Bool, Error>) -> Void) {
+        provider.registerGoogle(signResult: signResult) { result in
+            switch result {
+            case .success(_):
+                completionHandler(.success(true))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
+    }
 
     private func getParams(_ email: String, _ password: String) -> [AnyHashable: Any] {
         let userModel = UserModel(email: email, password: password)

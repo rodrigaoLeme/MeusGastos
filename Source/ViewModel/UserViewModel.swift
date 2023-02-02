@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import GoogleSignIn
 
 class UserViewModel {
     private let model: UserModel
@@ -46,6 +47,19 @@ class UserViewModel {
         let manager = UserManager(business: UserBusiness())
         
         manager.registerFacebook { result in
+            switch result {
+            case .success(_):
+                completionHandler(.success(true))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
+    }
+    
+    func registerGoogle(signResult: GIDSignInResult, completionHandler: @escaping (Result<Bool, Error>) -> Void) {
+        let manager = UserManager(business: UserBusiness())
+        
+        manager.registerGoogle(signResult: signResult) { result in
             switch result {
             case .success(_):
                 completionHandler(.success(true))

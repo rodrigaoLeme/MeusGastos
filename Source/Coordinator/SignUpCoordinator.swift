@@ -25,6 +25,10 @@ class SignUpCoordinator: Coordinator {
             self.homeStart()
         }
         
+        viewController.onGoogleTap = {
+            self.homeStart()
+        }
+        
         self.navigationController.pushViewController(viewController, animated: true)
     }
     

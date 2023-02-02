@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import GoogleSignIn
 
 class UserManager: UserManagerProtocol {
     
@@ -39,6 +40,17 @@ class UserManager: UserManagerProtocol {
     
     func registerFacebook(completionHandler: @escaping (Result<Bool, Error>) -> Void) {
         business.registerFacebook { result in
+            switch result {
+            case .success(_):
+                completionHandler(.success(true))
+            case .failure(let error):
+                completionHandler(.failure(error))
+            }
+        }
+    }
+    
+    func registerGoogle(signResult: GIDSignInResult, completionHandler: @escaping (Result<Bool, Error>) -> Void) {
+        business.registerGoogle(signResult: signResult) { result in
             switch result {
             case .success(_):
                 completionHandler(.success(true))
