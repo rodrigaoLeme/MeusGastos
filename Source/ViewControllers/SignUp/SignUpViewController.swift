@@ -12,6 +12,7 @@ class SignUpViewController: ViewControllerDefault {
     //MARK: Clousures
     var onRegisterSuccess: (() -> Void)?
     var onFacebookTap: (() -> Void)?
+    var onGoogleTap: (() -> Void)?
     
     lazy var signUpView: SignUpView = {
         let view = SignUpView()
@@ -23,6 +24,11 @@ class SignUpViewController: ViewControllerDefault {
         view.onRegisterFacebookTap = {[weak self] in
             guard let self = self else { return }
             self.registerFacebook()
+        }
+        
+        view.onRegisterGoogleTap = {[weak self] in
+            guard let self = self else { return }
+            self.registerGoogle()
         }
         
         return view
@@ -79,4 +85,7 @@ class SignUpViewController: ViewControllerDefault {
         }
     }
     
+    func registerGoogle() {
+        print("google tap")
+    }
 }

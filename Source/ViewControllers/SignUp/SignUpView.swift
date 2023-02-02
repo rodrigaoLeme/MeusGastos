@@ -12,6 +12,7 @@ class SignUpView: UIView {
     //MARK: Closures
     var onRegisterTap: ((_ name: String, _ email: String, _ password: String, _ button: TransitionButton) -> Void)?
     var onRegisterFacebookTap: (()->Void)?
+    var onRegisterGoogleTap: (() -> Void)?
     
     
     //MARK: Properts
@@ -86,6 +87,7 @@ class SignUpView: UIView {
         contentView.addSubview(googleButton)
         
         facebookButton.addTarget(self, action: #selector(registerFacebookTap), for: .touchUpInside)
+        googleButton.addTarget(self, action: #selector(registerGoogleTap), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             facebookButton.topAnchor.constraint(equalTo: imgSignUp.bottomAnchor, constant: 10),
@@ -167,6 +169,11 @@ class SignUpView: UIView {
     @objc
     func registerFacebookTap() {
         self.onRegisterFacebookTap?()
+    }
+    
+    @objc
+    func registerGoogleTap() {
+        self.onRegisterGoogleTap?()
     }
     
     @objc
