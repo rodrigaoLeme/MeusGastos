@@ -10,5 +10,6 @@ pod 'FirebaseAuth'
 pod 'FirebaseAnalytics'
 pod 'TransitionButton'
 pod 'FacebookLogin'
+pod 'GoogleSignIn'
 
 end
